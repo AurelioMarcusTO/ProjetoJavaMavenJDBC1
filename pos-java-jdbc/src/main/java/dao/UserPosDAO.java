@@ -114,6 +114,31 @@ public Userposjava buscar(Long id) throws Exception{
 		
 	}
 	
+public void atualizaremail (Userposjava userposjava) {
+		
+		try {
+		
+		String sql = "update userposjava set email = ? where id = " + userposjava.getId();
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, userposjava.getEmail());
+		
+		statement.execute();
+		connection.commit();
+		
+		}catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
 	public void deletar (Long id) {
 		
 		try {

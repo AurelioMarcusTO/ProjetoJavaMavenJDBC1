@@ -17,8 +17,8 @@ public class TesteBancoJdbc {
 		UserPosDAO userPosDAO = new UserPosDAO();
 		Userposjava userposjava = new Userposjava();
 
-		userposjava.setNome("Josefina");
-		userposjava.setEmail("josefina@hotmail.com");
+		userposjava.setNome("Matheus");
+		userposjava.setEmail("matheus@hotmail.com");
 
 		userPosDAO.salvar(userposjava);
 
@@ -49,10 +49,30 @@ public class TesteBancoJdbc {
 		UserPosDAO dao = new UserPosDAO();
 
 		try {
-			Userposjava userposjava = dao.buscar(5L);
+			Userposjava userposjava = dao.buscar(8L);
 
 			System.out.println(userposjava);
 
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Test
+	public void initAtualizarEmail() {
+
+		try {
+
+			UserPosDAO dao = new UserPosDAO();
+
+			Userposjava objetoBanco = dao.buscar(6L);
+			
+			objetoBanco.setEmail("Email mudado com metodo atualizar");
+			
+			dao.atualizaremail(objetoBanco);
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -67,9 +87,9 @@ public class TesteBancoJdbc {
 
 			UserPosDAO dao = new UserPosDAO();
 
-			Userposjava objetoBanco = dao.buscar(5L);
+			Userposjava objetoBanco = dao.buscar(6L);
 			
-			objetoBanco.setNome("Nome mudado com metodo atualizar");
+			objetoBanco.setNome("Nome atualizado Jose");
 			
 			dao.atualizar(objetoBanco);
 			
@@ -86,7 +106,7 @@ public class TesteBancoJdbc {
 		try {
 			
 			UserPosDAO dao = new UserPosDAO();
-			dao.deletar(11L);
+			dao.deletar(9L);
 			
 		}catch (Exception e) {
 			
