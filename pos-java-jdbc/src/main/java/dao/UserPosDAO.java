@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import conexaojdbc.SingleConnection;
 import model.Userposjava;
 
-public class UserPosDao {
+public class UserPosDAO {
 	
 	private Connection connection;
 	
-	public UserPosDao() {
+	public UserPosDAO() {
 		
 		connection = SingleConnection.getConnection();
 		

@@ -3,7 +3,7 @@ package pos_java_jdbc.pos_java_jdbc;
 import org.junit.Test;
 
 import conexaojdbc.SingleConnection;
-import dao.UserPosDao;
+import dao.UserPosDAO;
 import junit.framework.TestCase;
 import model.Userposjava;
 
@@ -12,7 +12,7 @@ public class TesteBancoJdbc{
 	@Test
 	public void initBanco() {
 		
-		UserPosDao userPosDAO = new UserPosDao();
+		UserPosDAO userPosDAO = new UserPosDAO();
 		Userposjava userposjava = new Userposjava();
 		
 		userposjava.setId(5L);
