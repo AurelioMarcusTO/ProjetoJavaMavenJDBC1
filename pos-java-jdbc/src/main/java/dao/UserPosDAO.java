@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
@@ -117,6 +118,37 @@ public Userposjava buscar(Long id) throws Exception{
 		
 	}
 
+	public List<BeanUserFone> listaUserFone (Long idUser) {
+		
+		List<BeanUserFone> beanUserFones = new ArrayList<BeanUserFone>();
+		
+		String sql = "select nome,numero,email from telefoneuser as fone inner"
+				+ " join userposjava as userp on fone.usuariopessoa = "
+				+ "userp.id where userp.id = " + idUser;
+		
+		try {
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+		
+		while(resultSet.next()) {
+			
+			BeanUserFone userFone = new BeanUserFone();
+			userFone.setEmail(resultSet.getString("email"));
+			userFone.setNome(resultSet.getString("nome"));
+			userFone.setNumero(resultSet.getString("numero"));
+			beanUserFones.add(userFone);
+			
+		}
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return beanUserFones;
+	}
+
 	public void atualizar (Userposjava userposjava) {
 		
 		try {
@@ -186,6 +218,35 @@ public void atualizaremail (Userposjava userposjava) {
 			e.printStackTrace();;
 			
 					}
+		
+	}
+	
+public void deleteFonesPorUser(Long idUser) {
+		
+		String sqlFone = "delete from telefoneuser where usuariopessoa =" + idUser;
+		String sqlUser = "delete from userposjava where id =" + idUser;
+		
+		try {
+		
+		
+		PreparedStatement preparedStatement = connection.prepareStatement(sqlFone);
+		preparedStatement.executeUpdate();
+		connection.commit();
+		
+		preparedStatement = connection.prepareStatement(sqlUser);
+		preparedStatement.executeUpdate();
+		connection.commit();
+		
+		
+		}catch(Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 		
 	}
 

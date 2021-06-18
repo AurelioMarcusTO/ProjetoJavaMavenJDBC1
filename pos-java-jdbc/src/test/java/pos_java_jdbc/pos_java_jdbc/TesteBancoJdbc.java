@@ -1,5 +1,7 @@
 package pos_java_jdbc.pos_java_jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.junit.Test;
@@ -7,6 +9,7 @@ import org.junit.Test;
 import conexaojdbc.SingleConnection;
 import dao.UserPosDAO;
 import junit.framework.TestCase;
+import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
@@ -18,8 +21,8 @@ public class TesteBancoJdbc {
 		UserPosDAO userPosDAO = new UserPosDAO();
 		Userposjava userposjava = new Userposjava();
 
-		userposjava.setNome("Matheus");
-		userposjava.setEmail("matheus@hotmail.com");
+		userposjava.setNome("Joao da Sila");
+		userposjava.setEmail("joaosilava@hotmail.com");
 
 		userPosDAO.salvar(userposjava);
 
@@ -117,17 +120,44 @@ public class TesteBancoJdbc {
 		
 	}
 	
+			
 	@Test
 	public void testeInsertTelefone() {
 		
 		Telefone telefone = new Telefone();
-		telefone.setNumero("(11) 97745-5577");
+		telefone.setNumero("(11) 3365-8897");
 		telefone.setTipo("casa");
-		telefone.setUsuario(15L);
+		telefone.setUsuario(17L);
 		
 		UserPosDAO dao = new UserPosDAO();
 		
 		dao.salvarTelefone(telefone);
+			
+	}
+	
+	@Test
+	public void testeCarregaFonesUser() {
+		
+		UserPosDAO dao = new UserPosDAO();
+		
+		List<BeanUserFone> beanUserFones = dao.listaUserFone(14L);
+		
+		for (BeanUserFone beanUserFone : beanUserFones) {
+			
+			System.out.println(beanUserFone);
+			System.out.println("----------------------------------------------");
+			
+		}
+		
+	}
+	
+	@Test
+	public void testDeleteUserFone() {
+		
+		
+		UserPosDAO dao = new UserPosDAO();
+		
+		dao.deleteFonesPorUser(14L);
 		
 		
 	}
